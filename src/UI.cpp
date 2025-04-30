@@ -3,9 +3,22 @@
 // コンストラクタ
 UI::UI(M5GFX* disp) {
   display = disp;
+  
+  // キャンバスの作成と基本設定
   canvas = new M5Canvas(display);
+  if (canvas != nullptr) {
+    canvas->setColorDepth(16); // 色深度設定
+    canvas->setFont(&fonts::Font2); // フォント設定
+  } else {
+    Serial.println("Error: Canvas creation failed!");
+  }
+  
+  // 状態の初期化
   currentState = STATE_WELCOME;
   currentCartPage = 0;
+  
+  // デバッグメッセージ
+  Serial.println("UI constructor completed");
 }
 
 // デストラクタ
@@ -17,28 +30,61 @@ UI::~UI() {
 
 // 初期化
 void UI::init() {
+  // スプライト作成前に安全チェック
+  if (canvas != nullptr) {
+    delete canvas;
+  }
+  
+  // 新しいキャンバスを作成
+  canvas = new M5Canvas(display);
   canvas->createSprite(320, 240);
   canvas->setTextSize(2);
-  canvas->setTextColor(WHITE);
+  canvas->setTextColor(WHITE, BLACK); // 前景色と背景色を指定
+  
+  // 初期表示
   showWelcomeScreen();
+  
+  // デバッグ用
+  Serial.println("UI初期化完了");
 }
 
 // 初期画面表示
 void UI::showWelcomeScreen() {
+  // 画面クリア
   canvas->fillScreen(BLACK);
-  canvas->setTextSize(2);
-  canvas->setCursor(20, 80);
+  
+  // 背景に色付きの四角形を描画（より視覚的に）
+  canvas->fillRoundRect(10, 10, 300, 220, 10, BLUE);
+  canvas->fillRoundRect(20, 20, 280, 200, 10, BLACK);
+  
+  // タイトル
+  canvas->setTextSize(3);
+  canvas->setTextColor(YELLOW, BLACK);
+  canvas->setCursor(30, 50);
   canvas->println("お買いものゲーム");
-  canvas->setCursor(20, 120);
-  canvas->println("QRコードをスキャンしてね！");
+  
+  // サブタイトル
+  canvas->setTextSize(2);
+  canvas->setTextColor(WHITE, BLACK);
+  canvas->setCursor(30, 100);
+  canvas->println("QRコードを");
+  canvas->setCursor(30, 130);
+  canvas->println("スキャンしてね！");
   
   // 操作説明
   canvas->setTextSize(1);
-  canvas->setCursor(10, 200);
+  canvas->setTextColor(GREEN, BLACK);
+  canvas->setCursor(30, 190);
   canvas->println("A:リセット B:買い物かご C:会計");
   
+  // スプライトを画面に描画
   canvas->pushSprite(0, 0);
+  
+  // 状態を更新
   currentState = STATE_WELCOME;
+  
+  // デバッグ用
+  Serial.println("初期画面表示");
 }
 
 // 商品表示

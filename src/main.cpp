@@ -124,12 +124,21 @@ void handleButtonPress() {
 }
 
 void setup() {
-  // M5Stackの初期化
-  M5.begin();
+  // M5Stackの初期化（LCD, SD, Serial, I2Cを有効化）
+  M5.begin(true, true, true, true);
   
   // ディスプレイの初期化
   display.begin();
+  display.fillScreen(TFT_DARKGREEN);
+  display.setTextColor(TFT_WHITE);
+  display.setTextSize(4);
+  display.setCursor(80, 100);
+  display.setTextDatum(MC_DATUM);
+  display.setTextPadding(display.width());
+  display.println("Stackan");
   display.setRotation(1); // 画面の向き（必要に応じて調整）
+  display.setBrightness(128); // 明るさを設定（0-255）
+  display.setColorDepth(16); // 色深度を16ビットに設定
   
   // UIの初期化
   ui = new UI(&display);
@@ -148,6 +157,20 @@ void setup() {
 
 void loop() {
   M5.update(); // ボタン状態の更新
+
+  // ディスプレイの更新確認
+  static unsigned long lastDisplayCheck = 0;
+  if (millis() - lastDisplayCheck > 1000) { // 1秒ごとにディスプレイ状態を確認
+    lastDisplayCheck = millis();
+    
+    // ディスプレイ表示が初期化されていない場合は再表示
+    if (display.width() <= 0 || display.height() <= 0) {
+      Serial.println("ディスプレイ再初期化");
+      display.begin();
+      display.setBrightness(200); // 明るさを上げる
+      ui->showWelcomeScreen(); // 画面を再描画
+    }
+  }
   
   // ボタン操作の処理
   handleButtonPress();
