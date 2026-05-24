@@ -3,7 +3,7 @@
 
 #include "Product.h"
 
-const int MAX_CART_ITEMS = 8;
+const int MAX_CART_ITEMS = 10;
 
 struct CartItem {
   const Product* product;

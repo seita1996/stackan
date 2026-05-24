@@ -51,11 +51,19 @@ void UI::drawProductArt(const Product* product, int x, int y, int size) {
     display->fillCircle(x + 84, y + 34, 20, product->color);
     display->fillCircle(x + 24, y + 78, 7, 0x8200);
     display->fillCircle(x + 98, y + 24, 7, 0x8200);
-  } else {
+  } else if (product->id == "2") {
     display->fillRoundRect(x + 20, y + 18, size - 40, size - 24, 8, TFT_WHITE);
     display->drawRoundRect(x + 20, y + 18, size - 40, size - 24, 8, TFT_BLUE);
     display->fillRect(x + 32, y + 8, size - 64, 18, TFT_BLUE);
     drawText(x + 44, y + 64, "MILK", 2, TFT_BLUE, TFT_WHITE);
+  } else {
+    display->fillRoundRect(x + 16, y + 16, size - 32, size - 32, 10, product->color);
+    display->drawRoundRect(x + 16, y + 16, size - 32, size - 32, 10, COLOR_TEXT);
+    display->fillCircle(x + size / 2, y + 42, 18, TFT_WHITE);
+    display->setTextSize(4);
+    display->setTextColor(COLOR_TEXT, product->color);
+    display->setCursor(x + 42, y + 70);
+    display->print(product->icon);
   }
 }
 
@@ -92,8 +100,7 @@ void UI::showItemAdded(const Product* product, const ShoppingCart* cart) {
   display->fillRoundRect(12, 44, 296, 160, 8, COLOR_PANEL);
   drawProductArt(product, 22, 62, 104);
 
-  const char* label = product->id == "0" ? "APPLE" : (product->id == "1" ? "BANANA" : "MILK");
-  drawText(140, 62, label, 3, COLOR_TEXT, COLOR_PANEL);
+  drawText(140, 62, product->label, 3, COLOR_TEXT, COLOR_PANEL);
 
   display->setTextSize(4);
   display->setTextColor(COLOR_TEXT, COLOR_PANEL);
@@ -145,11 +152,10 @@ void UI::showCart(const ShoppingCart* cart, int page) {
         continue;
       }
 
-      const char* label = item->product->id == "0" ? "APPLE" : (item->product->id == "1" ? "BANANA" : "MILK");
       int y = 96 + row * 32;
       display->fillCircle(30, y + 10, 9, item->product->color);
       display->setCursor(48, y);
-      display->printf("%s x%d", label, item->quantity);
+      display->printf("%s x%d", item->product->label, item->quantity);
       display->setCursor(216, y);
       display->printf("%d", item->product->price * item->quantity);
     }

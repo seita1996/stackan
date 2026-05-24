@@ -1,9 +1,16 @@
 #include "Product.h"
 
 static Product PRODUCTS[] = {
-  {"0", "りんご", 100, TFT_RED, 'A'},
-  {"1", "バナナ", 150, TFT_YELLOW, 'B'},
-  {"2", "ぎゅうにゅう", 200, TFT_WHITE, 'M'},
+  {"0", "りんご", "APPLE", 100, TFT_RED, 'A'},
+  {"1", "バナナ", "BANANA", 150, TFT_YELLOW, 'B'},
+  {"2", "ぎゅうにゅう", "MILK", 200, TFT_WHITE, 'M'},
+  {"3", "パン", "BREAD", 120, 0xF5B6, 'P'},
+  {"4", "たまご", "EGG", 180, 0xFFE0, 'E'},
+  {"5", "にんじん", "CARROT", 90, 0xFC60, 'C'},
+  {"6", "おにぎり", "RICE", 130, 0xFFFF, 'R'},
+  {"7", "ジュース", "JUICE", 160, 0xF81F, 'J'},
+  {"8", "おかし", "SNACK", 80, 0x07FF, 'S'},
+  {"9", "アイス", "ICE", 140, 0xAEDC, 'I'},
 };
 
 static const int PRODUCT_COUNT = sizeof(PRODUCTS) / sizeof(PRODUCTS[0]);

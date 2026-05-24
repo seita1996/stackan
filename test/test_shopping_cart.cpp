@@ -10,8 +10,8 @@ Product testProduct1;
 Product testProduct2;
 
 static void initTestProducts() {
-  testProduct1 = {"test1", "テスト商品1", 100, TFT_RED, '1'};
-  testProduct2 = {"test2", "テスト商品2", 200, TFT_YELLOW, '2'};
+  testProduct1 = {"test1", "テスト商品1", "TEST1", 100, TFT_RED, '1'};
+  testProduct2 = {"test2", "テスト商品2", "TEST2", 200, TFT_YELLOW, '2'};
 }
 
 // 空のカートのテスト

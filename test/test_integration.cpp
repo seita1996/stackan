@@ -117,6 +117,31 @@ void test_integration_shopping_process() {
   TEST_ASSERT_EQUAL(0, cart.getTotalAmount());
 }
 
+void test_integration_all_products_fit_in_cart() {
+  int expectedTotal = 0;
+
+  for (int i = 0; i < productDB.getProductCount(); i++) {
+    Product* product = productDB.getProductAt(i);
+    TEST_ASSERT_NOT_NULL(product);
+    TEST_ASSERT_TRUE(cart.addProduct(product));
+    expectedTotal += product->price;
+  }
+
+  TEST_ASSERT_EQUAL(10, cart.getItemCount());
+  TEST_ASSERT_EQUAL(10, cart.getTotalQuantity());
+  TEST_ASSERT_EQUAL(expectedTotal, cart.getTotalAmount());
+
+  CartItem* item8 = cart.getItemAt(8);
+  TEST_ASSERT_NOT_NULL(item8);
+  TEST_ASSERT_EQUAL_STRING("8", item8->product->id.c_str());
+  TEST_ASSERT_EQUAL_STRING("おかし", item8->product->name.c_str());
+
+  CartItem* item9 = cart.getItemAt(9);
+  TEST_ASSERT_NOT_NULL(item9);
+  TEST_ASSERT_EQUAL_STRING("9", item9->product->id.c_str());
+  TEST_ASSERT_EQUAL_STRING("アイス", item9->product->name.c_str());
+}
+
 void test_scan_deduplicator_blocks_same_qr_briefly() {
   ScanDeduplicator deduplicator(1500);
 

@@ -37,6 +37,7 @@ void test_integration_scan_to_display();
 void test_integration_add_to_cart();
 void test_integration_invalid_qr();
 void test_integration_shopping_process();
+void test_integration_all_products_fit_in_cart();
 void test_scan_deduplicator_blocks_same_qr_briefly();
 
 void RUN_UNITY_TESTS() {
@@ -58,6 +59,7 @@ void RUN_UNITY_TESTS() {
   RUN_TEST(test_integration_add_to_cart);
   RUN_TEST(test_integration_invalid_qr);
   RUN_TEST(test_integration_shopping_process);
+  RUN_TEST(test_integration_all_products_fit_in_cart);
   RUN_TEST(test_scan_deduplicator_blocks_same_qr_briefly);
   UNITY_END();
 }

@@ -6,6 +6,7 @@
 struct Product {
   String id;
   String name;
+  const char* label;
   int price;
   uint16_t color;
   char icon;
