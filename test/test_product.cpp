@@ -7,7 +7,7 @@ extern ProductDB productDB;
 // 商品データ初期化のテスト
 void test_product_init() {
   // 初期化後に商品数が正しいことを確認
-  TEST_ASSERT_EQUAL(10, productDB.getProductCount());
+  TEST_ASSERT_EQUAL(12, productDB.getProductCount());
   
   // 各商品のデータが正しく設定されていることを確認
   Product* p0 = productDB.getProductAt(0);
@@ -38,9 +38,16 @@ void test_product_init() {
   Product* p9 = productDB.getProductAt(9);
   TEST_ASSERT_NOT_NULL(p9);
   TEST_ASSERT_EQUAL_STRING("9", p9->id.c_str());
-  TEST_ASSERT_EQUAL_STRING("アイス", p9->name.c_str());
-  TEST_ASSERT_EQUAL_STRING("ICE", p9->label);
+  TEST_ASSERT_EQUAL_STRING("アイスクリーム", p9->name.c_str());
+  TEST_ASSERT_EQUAL_STRING("ICE CREAM", p9->label);
   TEST_ASSERT_EQUAL(140, p9->price);
+
+  Product* p11 = productDB.getProductAt(11);
+  TEST_ASSERT_NOT_NULL(p11);
+  TEST_ASSERT_EQUAL_STRING("11", p11->id.c_str());
+  TEST_ASSERT_EQUAL_STRING("鶏肉", p11->name.c_str());
+  TEST_ASSERT_EQUAL_STRING("CHICKEN", p11->label);
+  TEST_ASSERT_EQUAL(260, p11->price);
 }
 
 // 商品検索のテスト
@@ -52,7 +59,11 @@ void test_product_find() {
 
   product = productDB.findProductById("9");
   TEST_ASSERT_NOT_NULL(product);
-  TEST_ASSERT_EQUAL_STRING("アイス", product->name.c_str());
+  TEST_ASSERT_EQUAL_STRING("アイスクリーム", product->name.c_str());
+
+  product = productDB.findProductById("10");
+  TEST_ASSERT_NOT_NULL(product);
+  TEST_ASSERT_EQUAL_STRING("さかな", product->name.c_str());
   
   // 存在しない商品IDで検索
   product = productDB.findProductById("999");

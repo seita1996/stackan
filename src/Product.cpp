@@ -9,8 +9,10 @@ static Product PRODUCTS[] = {
   {"5", "にんじん", "CARROT", 90, 0xFC60, 'C'},
   {"6", "おにぎり", "RICE", 130, 0xFFFF, 'R'},
   {"7", "ジュース", "JUICE", 160, 0xF81F, 'J'},
-  {"8", "おかし", "SNACK", 80, 0x07FF, 'S'},
-  {"9", "アイス", "ICE", 140, 0xAEDC, 'I'},
+  {"8", "もも", "PEACH", 80, 0xFDB8, 'P'},
+  {"9", "アイスクリーム", "ICE CREAM", 140, 0xAEDC, 'I'},
+  {"10", "さかな", "FISH", 220, 0x07FF, 'F'},
+  {"11", "鶏肉", "CHICKEN", 260, 0xFBE0, 'C'},
 };
 
 static const int PRODUCT_COUNT = sizeof(PRODUCTS) / sizeof(PRODUCTS[0]);
