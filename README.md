@@ -2,12 +2,16 @@
 
 M5Stack Basic / M5GO と QRコードスキャナユニット(STM32F030)を使った、4歳児向けのお買い物ごっこアプリです。商品カードのQRコードをスキャンすると、商品がすぐに買い物かごへ入り、画面に商品名・金額・合計が表示されます。
 
+<img width="1455" height="1348" alt="Stackan完成図" src="https://github.com/user-attachments/assets/402be459-cab0-4253-99a9-96a59b737579" />
+
+<img width="400" height="711" alt="操作" src="https://github.com/user-attachments/assets/96092c49-5f94-488a-8f31-744ca46f8226" />
+
 ## 体験設計
 
 - 子どもは商品カードを「ピッ」とスキャンするだけ
 - スキャンした商品は自動で買い物かごに追加
 - 画面には大きな商品表示、合計金額、個数を表示
-- ボタンCで会計し、「おかいけいできた」を表示
+- ボタンCで会計し、合計金額を表示
 - エラーコードや配線診断は画面に出さず、Serialログに出力
 
 ## 必要なハードウェア
@@ -53,6 +57,9 @@ QRコードは以下の形式で作成します。
 ### QRコードスキャナ接続時の注意
 
 QRコードスキャナユニットをM5StackのPort Cに接続する場合は、ユニット側面の通信切替スイッチを **UART側** にしてください。スイッチがI2C側のままだと、スキャナ本体は「ピッ」と鳴って読み取り成功に見えても、M5Stack側には読み取り結果が届かずカートが更新されません。
+
+<img width="600" height="800" alt="M5Stack側はCポート" src="https://github.com/user-attachments/assets/7549735d-e57f-40f5-9ac4-30ec8f1bfc9a" />
+<img width="600" height="800" alt="通信切替スイッチはUART" src="https://github.com/user-attachments/assets/893ed4ae-c565-4fb1-998f-57a683e24d77" />
 
 ## 遊び方
 
